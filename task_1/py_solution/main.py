@@ -19,5 +19,6 @@ def bin_search_inner(li, elem, top, bottom, index):
 
 
 if __name__ == '__main__':
-	ls = [1, 2, 2, 2, 2, 3, 3, 4, 5, 66, 8789]
-	print(bin_search(ls, 3))
+	ls = [2, 5, 7, 9, 11, 17, 222]
+	print(bin_search(ls, 11))
+	print(bin_search(ls, 12))
