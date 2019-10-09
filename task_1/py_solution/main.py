@@ -1,18 +1,29 @@
 
+def if_else(cond, success, fail):
+	def inner():
+		return success() if cond else fail()
+	return inner
+
+
+def bs_inner(arr, x, bottom, top):
+	mid = (top + bottom) // 2
+	return if_else(
+		top < bottom,
+		lambda: -1,
+		if_else(
+			arr[mid] == x,
+			lambda: mid,
+			if_else(
+				arr[mid] > x,
+				lambda: bs_inner(arr, x, bottom, mid - 1),
+				lambda: bs_inner(arr, x, mid + 1, top)
+			)
+		)
+	)()
+
+
 def bin_search(li, elem):
-	return binary_search_inner(li, elem, 0, len(li) - 1)
-
-
-def binary_search_inner(arr, x, bottom, top):
-	if top < bottom:
-		return -1
-	mid = int(bottom + (top - bottom) / 2)
-	if arr[mid] == x:
-		return mid
-	elif arr[mid] > x:
-		return binary_search_inner(arr, x, bottom, mid - 1)
-	else:
-		return binary_search_inner(arr, x, mid + 1, top)
+	return bs_inner(li, elem, 0, len(li) - 1)
 
 
 if __name__ == '__main__':
