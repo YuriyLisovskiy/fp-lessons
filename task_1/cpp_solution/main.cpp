@@ -13,7 +13,7 @@ Func if_else(const std::function<bool()>& cond, Func success, Func fail)
 	};
 }
 
-int bs_inner(int arr[], int x, int bottom, int top)
+int bin_search_inner(int arr[], int x, int bottom, int top)
 {
 	int mid = (top + bottom) / 2;
 	return if_else<int, std::function<int()>>(
@@ -24,8 +24,8 @@ int bs_inner(int arr[], int x, int bottom, int top)
 			[mid]() -> int { return mid; },
 			if_else<int, std::function<int()>>(
 				[arr, mid, x]() -> bool { return arr[mid] > x; },
-				[arr, x, bottom, mid]() -> int { return bs_inner(arr, x, bottom, mid - 1); },
-				[arr, x, top, mid]() -> int { return bs_inner(arr, x, mid + 1, top); }
+				[arr, x, bottom, mid]() -> int { return bin_search_inner(arr, x, bottom, mid - 1); },
+				[arr, x, top, mid]() -> int { return bin_search_inner(arr, x, mid + 1, top); }
 			)
 		)
 	)();
@@ -33,7 +33,7 @@ int bs_inner(int arr[], int x, int bottom, int top)
 
 int bin_search(int arr[], int n, int x)
 {
-	return bs_inner(arr, x, 0, n - 1);
+	return bin_search_inner(arr, x, 0, n - 1);
 }
 
 
