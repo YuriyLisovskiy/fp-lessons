@@ -5,11 +5,7 @@ template <typename T, typename Func>
 Func if_else(const std::function<bool()>& cond, Func success, Func fail)
 {
 	return [cond, success, fail]() -> T {
-		if (cond())
-		{
-			return success();
-		}
-		return fail();
+		return cond() ? success() : fail();
 	};
 }
 
