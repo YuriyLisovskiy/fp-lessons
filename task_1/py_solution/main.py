@@ -1,21 +1,18 @@
-import math
-
 
 def bin_search(li, elem):
-	return bin_search_inner(li, elem, len(li) - 1, 0, -1)
+	return binary_search_inner(li, elem, 0, len(li) - 1)
 
 
-def bin_search_inner(li, elem, top, bottom, index):
-	mid = int(math.floor((top + bottom) / 2.0))
-	if li[mid] == elem:
-		index = mid
-	elif li[mid] > elem:
-		top = mid - 1
+def binary_search_inner(arr, x, bottom, top):
+	if top < bottom:
+		return -1
+	mid = int(bottom + (top - bottom) / 2)
+	if arr[mid] == x:
+		return mid
+	elif arr[mid] > x:
+		return binary_search_inner(arr, x, bottom, mid - 1)
 	else:
-		bottom = mid + 1
-	if top >= bottom and index == -1:
-		return bin_search_inner(li, elem, top, bottom, index)
-	return index
+		return binary_search_inner(arr, x, mid + 1, top)
 
 
 if __name__ == '__main__':
