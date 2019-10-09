@@ -1,8 +1,8 @@
 package main
 
-func ifElse(cond bool, success func() interface{}, fail func() interface{}) func() interface{} {
+func ifElse(cond func() bool, success func() interface{}, fail func() interface{}) func() interface{} {
 	return func() interface{} {
-		if cond {
+		if cond() {
 			return success()
 		}
 		return fail()
@@ -12,17 +12,23 @@ func ifElse(cond bool, success func() interface{}, fail func() interface{}) func
 func binSearchInner(arr []int, x int, bottom int, top int) int {
 	mid := (top + bottom) / 2
 	return ifElse(
-		top < bottom,
+		func() bool {
+			return top < bottom
+		},
 		func() interface{} {
 			return -1
 		},
 		ifElse(
-			arr[mid] == x,
+			func() bool {
+				return arr[mid] == x
+			},
 			func() interface{} {
 				return mid
 			},
 			ifElse(
-				arr[mid] > x,
+				func() bool {
+					return arr[mid] > x
+				},
 				func() interface{} {
 					return binSearchInner(arr, x, bottom, mid - 1)
 				},
