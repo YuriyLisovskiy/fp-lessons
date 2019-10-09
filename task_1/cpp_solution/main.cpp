@@ -1,0 +1,48 @@
+#include <iostream>
+#include <functional>
+
+template <typename T, typename Func>
+Func if_else(const std::function<bool()>& cond, Func success, Func fail)
+{
+	return [cond, success, fail]() -> T {
+		if (cond())
+		{
+			return success();
+		}
+		return fail();
+	};
+}
+
+int bs_inner(int arr[], int x, int bottom, int top)
+{
+	int mid = (top + bottom) / 2;
+	return if_else<int, std::function<int()>>(
+		[top, bottom]() -> bool { return top < bottom; },
+		[]() -> int { return -1; },
+		if_else<int, std::function<int()>>(
+			[arr, mid, x]() -> bool { return arr[mid] == x; },
+			[mid]() -> int { return mid; },
+			if_else<int, std::function<int()>>(
+				[arr, mid, x]() -> bool { return arr[mid] > x; },
+				[arr, x, bottom, mid]() -> int { return bs_inner(arr, x, bottom, mid - 1); },
+				[arr, x, top, mid]() -> int { return bs_inner(arr, x, mid + 1, top); }
+			)
+		)
+	)();
+}
+
+int bin_search(int arr[], int n, int x)
+{
+	return bs_inner(arr, x, 0, n - 1);
+}
+
+
+int main()
+{
+	int n = 7;
+	int arr[] = {2, 5, 7, 9, 11, 17, 222};
+	std::cout << bin_search(arr, n, 11) << '\n';
+	std::cout << bin_search(arr, n, 12) << '\n';
+
+	return 0;
+}

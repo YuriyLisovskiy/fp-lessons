@@ -1,20 +1,20 @@
 
 def if_else(cond, success, fail):
 	def inner():
-		return success() if cond else fail()
+		return success() if cond() else fail()
 	return inner
 
 
 def bs_inner(arr, x, bottom, top):
 	mid = (top + bottom) // 2
 	return if_else(
-		top < bottom,
+		lambda: top < bottom,
 		lambda: -1,
 		if_else(
-			arr[mid] == x,
+			lambda: arr[mid] == x,
 			lambda: mid,
 			if_else(
-				arr[mid] > x,
+				lambda: arr[mid] > x,
 				lambda: bs_inner(arr, x, bottom, mid - 1),
 				lambda: bs_inner(arr, x, mid + 1, top)
 			)
