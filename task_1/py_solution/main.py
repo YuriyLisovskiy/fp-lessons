@@ -22,8 +22,8 @@ def bin_search_inner(arr, x, bottom, top):
 	)()
 
 
-def bin_search(arr, elem):
-	return bin_search_inner(arr, elem, 0, len(arr) - 1)
+def bin_search(arr, x):
+	return bin_search_inner(arr, x, 0, len(arr) - 1)
 
 
 if __name__ == '__main__':
