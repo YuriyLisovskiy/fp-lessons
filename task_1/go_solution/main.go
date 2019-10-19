@@ -1,6 +1,7 @@
 package main
 
 func ifElse(cond func() bool, success func() interface{}, fail func() interface{}) func() interface{} {
+	// Closure: returns anonymous function as a result of 'ifElse'
 	return func() interface{} {
 		if cond() {
 			return success()
@@ -9,6 +10,8 @@ func ifElse(cond func() bool, success func() interface{}, fail func() interface{
 	}
 }
 
+// Higher-order functions: passing anonymous functions
+// 	and 'ifElse' as parameters of 'ifElse'.
 func binSearchInner(arr []int, x int, bottom int, top int) int {
 	mid := (top + bottom) / 2
 	return ifElse(
@@ -30,10 +33,10 @@ func binSearchInner(arr []int, x int, bottom int, top int) int {
 					return arr[mid] > x
 				},
 				func() interface{} {
-					return binSearchInner(arr, x, bottom, mid - 1)
+					return binSearchInner(arr, x, bottom, mid - 1)	// Recursion
 				},
 				func() interface{} {
-					return binSearchInner(arr, x, mid + 1, top)
+					return binSearchInner(arr, x, mid + 1, top)		// Recursion
 				},
 			),
 		),
