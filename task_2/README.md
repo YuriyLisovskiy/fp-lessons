@@ -35,7 +35,7 @@ sorted list. The function should return the index of element to be
 searched in the list.
 
 This code may produce an unexpected behaviour when any parameter
-of bin_search function is None.
+of `bin_search` function is None.
 
 Solution without monad:
 ```python
@@ -68,13 +68,13 @@ print(bin_search(li, 12))
 
 Self invented problem =):
 
-Calculate the expression log(number, base) / denominator,
-where number, base and denominator is numeric numbers which
+Calculate the expression `log(number, base) / denominator`,
+where `number`, `base` and `denominator` is numeric numbers which
 is read from console.
 
-This code may produce type cast error, domain error when @num or @base
+This code may produce type cast error, domain error when `num` or `base`
 is not valid for calculating the logarithm and division by zero
-error, when @denominator is 0.
+error, when `denominator` is 0.
 
 Solution without monad:
 ```python
