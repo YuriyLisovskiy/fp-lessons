@@ -6,19 +6,12 @@
 
 Write a program which can compute the factorial of a given numbers.
 The results should be printed in a comma-separated sequence on a
-single line. Suppose the following input is supplied to the program:
+single line.
 
-`8`
+This code may produce type cast error when casting user input to
+integer number.
 
-Then, the output should be:
-
-`40320`
-
-Hints:
-In case of input data being supplied to the question, it should be
-assumed to be a console input.
-
-Imperative solution:
+Solution without monad:
 
 ```python
 def fact(x):
@@ -41,9 +34,10 @@ Please write a binary search function which searches an item in a
 sorted list. The function should return the index of element to be
 searched in the list.
 
-Hints: use if/elif to deal with conditions.
+This code may produce an unexpected behaviour when any parameter
+of bin_search function is None.
 
-Solution:
+Solution without monad:
 ```python
 import math
 
@@ -66,4 +60,30 @@ def bin_search(li, element):
 li = [2, 5, 7, 9, 11, 17, 222]
 print(bin_search(li, 11))
 print(bin_search(li, 12))
+```
+
+## Try monad task:
+ * [Try monad implementation](monad/try_.py)
+ * [solved task](try_task.py)
+
+Self invented problem =):
+
+Calculate the expression log(number, base) / denominator,
+where number, base and denominator is numeric numbers which
+is read from console.
+
+This code may produce type cast error, domain error when @num or @base
+is not valid for calculating the logarithm and division by zero
+error, when @denominator is 0.
+
+Solution without monad:
+```python
+import math
+
+
+num = float(input('Input number:'))
+base = float(input('Input base:'))
+denominator = float(input('Input denominator:'))
+
+print('Result:', (math.log(num, base) / denominator))
 ```
