@@ -140,4 +140,5 @@ venv.bak/
 
 cmake-build-debug/
 private_key.json
+storage.json
 
