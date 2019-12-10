@@ -65,11 +65,3 @@ class LUISAgent:
 			'Happy to help',
 			'You got it'
 		])
-
-
-if __name__ == '__main__':
-	from app.settings import LUIS_APP_ID, LUIS_APP_KEY
-	from pprint import pprint
-	
-	agent = LUISAgent(LUIS_APP_ID, LUIS_APP_KEY)
-	pprint(agent.analyze('my exams'))
